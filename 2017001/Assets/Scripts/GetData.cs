@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.IO;
-using System.Collections;
 using UnityEngine.VR;
 using System;
 using System.Text;
@@ -12,7 +11,6 @@ public class GetData : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		InputTracking.Recenter();
 		FileStream f = new FileStream(@"D:\UnityConsole\test.csv",
 			FileMode.OpenOrCreate, FileAccess.Write);
 		StreamWriter sw = new StreamWriter(f);
@@ -30,6 +28,8 @@ public class GetData : MonoBehaviour {
 	
 	// Update is called once per frame
 	void GetDatas () {
+		//每次刷新前重置初始位置和旋转角度
+		InputTracking.Recenter();
 		hmdTrackedObjectedPos = InputTracking.GetLocalPosition(VRNode.CenterEye);
 		hmdTrackedRotation = InputTracking.GetLocalRotation(VRNode.CenterEye);
 
